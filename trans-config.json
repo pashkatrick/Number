@@ -1,0 +1,34 @@
+[
+    {
+        "operation_id": 1,
+        "title": "Интернет",
+        "body": "",
+        "value": 1200,
+        "currency": "RUB",
+        "repeated": {
+            "enable": true,
+            "period": "5 4 * * *"
+        }
+    },
+    {
+        "operation_id": 2,
+        "title": "Проездной",
+        "body": "",
+        "value": 130,
+        "currency": "RUB",
+        "repeated": {
+            "enable": true,
+            "period": "5 4 * * *"
+        }
+    },
+    {
+        "operation_id": 3,
+        "title": "Проездной",
+        "body": "",
+        "value": 13,
+        "currency": "EUR",
+        "repeated": {
+            "enable": false
+        }
+    }
+]
