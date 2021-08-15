@@ -1,31 +1,38 @@
 [
     {
         "operation_id": 1,
-        "title": "Интернет",
-        "body": "",
-        "value": 1200,
+        "body": "Интернет",
+        "value": "1200",
         "currency": "RUB",
         "repeated": {
             "enable": true,
-            "period": "5 4 * * *"
+            "period": "* 5 * * 4"
         }
     },
     {
         "operation_id": 2,
-        "title": "Проездной",
-        "body": "",
-        "value": 130,
+        "body": "Проездной",
+        "value": "130",
         "currency": "RUB",
         "repeated": {
             "enable": true,
-            "period": "5 4 * * *"
+            "period": "* 5 * * 1"
         }
     },
     {
         "operation_id": 3,
-        "title": "Проездной",
-        "body": "",
-        "value": 13,
+        "body": "Купил попить",
+        "value": "1300",
+        "currency": "EUR",
+        "repeated": {
+            "enable": false,
+            "period": "20-08-17T00-01-00"
+        }
+    },
+    {
+        "operation_id": 4,
+        "body": "Проездной",
+        "value": "13",
         "currency": "EUR",
         "repeated": {
             "enable": false

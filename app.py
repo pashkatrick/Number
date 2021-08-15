@@ -32,16 +32,21 @@ def cal_generate(data):
     cal_range = cal.rest_of_month()
     for date_obj in cal_range:
         for dat in data:
-            if dat['repeated']['enable'] == True and cron.is_today(dat['repeated']['period']):
+            # add compairing perod and date
+            if dat['repeated']['enable'] == True and cron.is_in(dat['repeated']['period'], date_obj):
                 obj = dict(
                     id=dat['operation_id'],
+                    # harcode
                     calendarId='1',
-                    title=dat['title'],
-                    body='test',
-                    category='time'
+                    title=f"{dat['value']}, {dat['currency']}",
+                    body=dat['body'],
+                    # harcode
+                    category='time',
+                    start=date_obj,
+                    end=date_obj
                 )
                 new_data.append(obj)
-    print('that\'s ok')
+    return new_data
 
 
 @app.route('/daily')

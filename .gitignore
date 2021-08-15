@@ -1,0 +1,6 @@
+tui*
+*env
+help*
+.DS_Store
+__pycache__
+*pyc

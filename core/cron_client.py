@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import pycron
 
 
@@ -6,10 +6,7 @@ class CronClient:
     def __init__(self):
         pass
 
-    def is_today(self, period=None):
-        # TODO: need to unmock
-        tst = '2021-08-13'
-        dt_obj = datetime.strptime(tst, '%Y-%m-%d')
-        tst2 = '2021-08-14'
-        dt_obj2 = datetime.strptime(tst2, '%Y-%m-%d')
-        return pycron.has_been(period, dt_obj, dt_obj2)
+    def is_in(self, period: str, start: datetime, end: datetime = None) -> bool:
+        if end is None:
+            end = start + timedelta(days=1)
+        return pycron.has_been(period, start, end)
