@@ -1,6 +1,7 @@
 import datetime
 import calendar
-# from datetime import datetime
+from datetime import timedelta
+import pycron
 
 
 class CalendarClient:
@@ -31,3 +32,8 @@ class CalendarClient:
             date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%d')
             rest_of_month.append(date_obj)
         return rest_of_month
+
+    def is_in(self, period: str, start: datetime, end: datetime = None) -> bool:
+        if end is None:
+            end = start + timedelta(days=1)
+        return pycron.has_been(period, start, end)

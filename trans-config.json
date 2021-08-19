@@ -26,16 +26,17 @@
         "currency": "EUR",
         "repeated": {
             "enable": false,
-            "period": "20-08-17T00-01-00"
+            "period": "20-08-19T00-01-00"
         }
     },
     {
         "operation_id": 4,
         "body": "Проездной",
         "value": "13",
-        "currency": "EUR",
+        "currency": "USD",
         "repeated": {
-            "enable": false
+            "enable": false,
+            "period": "20-08-19T00-01-00"
         }
     }
 ]

@@ -4,12 +4,11 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import json
 from pprint import pprint
-from core import CronClient, CalendarClient
+from core import CalendarClient
 
 
 app = Flask(__name__)
 
-cron = CronClient()
 cal = CalendarClient()
 
 
@@ -32,8 +31,7 @@ def cal_generate(data):
     cal_range = cal.rest_of_month()
     for date_obj in cal_range:
         for dat in data:
-            # add compairing perod and date
-            if dat['repeated']['enable'] == True and cron.is_in(dat['repeated']['period'], date_obj):
+            if dat['repeated']['enable'] == True and cal.is_in(dat['repeated']['period'], date_obj):
                 obj = dict(
                     id=dat['operation_id'],
                     # harcode
@@ -46,6 +44,21 @@ def cal_generate(data):
                     end=date_obj
                 )
                 new_data.append(obj)
+                # TODO: new date method
+            elif dat['repeated']['enable'] == False and True:
+                obj = dict(
+                    id=dat['operation_id'],
+                    # harcode
+                    calendarId='1',
+                    title=f"{dat['value']}, {dat['currency']}",
+                    body=dat['body'],
+                    # harcode
+                    category='time',
+                    start=date_obj,
+                    end=date_obj
+                )
+                new_data.append(obj)
+
     return new_data
 
 
@@ -57,10 +70,10 @@ def daily_scalp():
     for op in data:
         if op['repeated']['enable'] == True:
             period = op['repeated']['period']
-            if cron.is_today(period):
+            if cal.is_today(period):
                 result_sum += op['value']
             print(f'{period}\n')
-            print(cron.is_today(period))
+            print(cal.is_today(period))
 
     return f'Сумма за сегодня {result_sum}'
 
