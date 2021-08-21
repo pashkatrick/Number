@@ -31,35 +31,30 @@ def cal_generate(data):
     cal_range = cal.rest_of_month()
     for date_obj in cal_range:
         for dat in data:
-            if dat['repeated']['enable'] == True and cal.is_in(dat['repeated']['period'], date_obj):
-                obj = dict(
-                    id=dat['operation_id'],
-                    # harcode
-                    calendarId='1',
-                    title=f"{dat['value']}, {dat['currency']}",
-                    body=dat['body'],
-                    # harcode
-                    category='time',
-                    start=date_obj,
-                    end=date_obj
+            if dat['repeated']['enable'] == True and cal.is_cron_date(dat['repeated']['period'], date_obj):
+                new_data.append(
+                    get_ops_data(dat, date_obj)
                 )
-                new_data.append(obj)
-                # TODO: new date method
-            elif dat['repeated']['enable'] == False and True:
-                obj = dict(
-                    id=dat['operation_id'],
-                    # harcode
-                    calendarId='1',
-                    title=f"{dat['value']}, {dat['currency']}",
-                    body=dat['body'],
-                    # harcode
-                    category='time',
-                    start=date_obj,
-                    end=date_obj
+            elif dat['repeated']['enable'] == False and cal.is_date(dat['repeated']['period'], date_obj):
+                new_data.append(
+                    get_ops_data(dat, date_obj)
                 )
-                new_data.append(obj)
 
     return new_data
+
+
+def get_ops_data(data, date: datetime = None):
+    return dict(
+        id=data['operation_id'],
+        # harcode
+        calendarId='1',
+        title=f"{data['value']}, {data['currency']}",
+        body=data['body'],
+        # harcode
+        category='time',
+        start=date,
+        end=date
+    )
 
 
 @app.route('/daily')

@@ -33,7 +33,13 @@ class CalendarClient:
             rest_of_month.append(date_obj)
         return rest_of_month
 
-    def is_in(self, period: str, start: datetime, end: datetime = None) -> bool:
+    def is_cron_date(self, period: str, start: datetime, end: datetime = None) -> bool:
         if end is None:
             end = start + timedelta(days=1)
         return pycron.has_been(period, start, end)
+
+    def is_date(self, period: str, start: datetime, end: datetime = None) -> bool:
+        if end is None:
+            end = start + timedelta(days=1)
+        date_obj = datetime.datetime.strptime(period, '%Y-%m-%d')
+        return start <= date_obj and date_obj <= end
